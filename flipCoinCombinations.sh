@@ -96,3 +96,75 @@ echo "Percentage For HT = "$htPercent2"%";
 echo "Percentage for TH = "$thPercent2"%";
 
 echo "${doubleDict[@]}";
+
+#4#
+declare -A tripletDict
+for k in {1..100}
+do
+        value1=$( generateHeadsOrTails $((RANDOM%2)) );
+        value2=$( generateHeadsOrTails $((RANDOM%2)) );
+	value3=$( generateHeadsOrTails $((RANDOM%2)) );
+        valueFinal=$value1$value2$value3;
+
+        if [ "$valueFinal" == "HHH" ]
+        then
+                hhhCounter=$((hhhCounter+1));
+        elif [ "$valueFinal" == "HHT" ]
+        then
+                hhtCounter=$((hhtCounter+1));
+        elif [ "$valueFinal" == "HTH" ]
+        then
+                hthCounter=$((hthCounter+1));
+        elif [ "$valueFinal" == "HTT" ]
+	then
+                httCounter=$((httCounter+1));
+        elif [ "$valueFinal" == "THH" ]
+	then
+		thhCounter=$((thhCounter+1));
+	elif [ "$valueFinal" == "THT" ]
+	then
+		thtCounter=$((thtCounter+1));
+	elif [ "$valueFinal" == "TTH" ]
+	then
+		tthCounter=$((tthCounter+1));
+	else
+		tttCounter=$((tttCounter+1));
+	fi
+
+        tripletDict[$k]=$valueFinal;
+done
+
+hhhpercent1=`echo $hhhCounter | awk '{print $1/100}'`;
+hhhpercent2=`echo $hhhpercent1 | awk '{print $1*100 }'`;
+
+tttPercent1=`echo $tttCounter | awk '{print $1/100}'`;
+tttPercent2=`echo $tttPercent1 | awk '{print $1*100}'`;
+
+hhtPercent1=`echo $hhtCounter | awk '{print $1/100}'`;
+hhtPercent2=`echo $hhtPercent1 | awk '{print $1*100}'`;
+
+hthPercent1=`echo $hthCounter | awk '{print $1/100}'`;
+hthPercent2=`echo $hthPercent1 | awk '{print $1*100}'`;
+
+httpercent1=`echo $httCounter | awk '{print $1/100}'`;
+httpercent2=`echo $httpercent1 | awk '{print $1*100 }'`;
+
+tthPercent1=`echo $tthCounter | awk '{print $1/100}'`;
+tthPercent2=`echo $tthPercent1 | awk '{print $1*100}'`;
+
+thhPercent1=`echo $thhCounter | awk '{print $1/100}'`;
+thhPercent2=`echo $thhPercent1 | awk '{print $1*100}'`;
+
+thtPercent1=`echo $thtCounter | awk '{print $1/100}'`;
+thtPercent2=`echo $thtPercent1 | awk '{print $1*100}'`;
+
+echo "Percentage For Triple Heads = "$hhhpercent2"%";
+echo "Percentage For Triple Tails = "$tttPercent2"%";
+echo "Percentage For HHT = "$hhtPercent2"%";
+echo "Percentage for HTH = "$hthPercent2"%";
+echo "Percentage For HTT = "$httpercent2"%";
+echo "Percentage For THH = "$thhPercent2"%";
+echo "Percentage For THT = "$thtPercent2"%";
+echo "Percentage for TTH = "$tthPercent2"%";
+
+echo "${tripletDict[@]}";
